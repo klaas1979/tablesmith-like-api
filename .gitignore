@@ -1,0 +1,39 @@
+# Mac
+.DS_Store
+
+# IDE
+.idea/
+.vs/
+.vscode/
+workspace.code-workspace
+
+# Node Modules
+node_modules/
+npm-debug.log
+
+# yarn2
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
+# Peggy generated Parsers
+build
+
+# Distribution files
+dist
+
+# ESLint
+.eslintcache
+
+# Junit results
+junit.xml
+
+# Tables that are not free to use for bigger tests
+test/tables/*.tab
+
+# Coverage of tests
+coverage

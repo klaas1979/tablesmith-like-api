@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "lib": ["DOM", "es2016"],
+    "types": [],
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "allowJs": true,
+    "checkJs": false,
+    "strict": true,
+    "sourceMap": true
+  },
+  "include": ["src"]
+}
