@@ -10,8 +10,8 @@ const peggy = require('./gulp-peggy');
 
 const name = path.basename(path.resolve('.'));
 const sourceDirectory = './src';
-const buildDirectory = './build';
-const distDirectory = './dist';
+const buildDirectory = './src/module/tablesmith';
+const distDirectory = './lib';
 const sourceFileExtension = 'ts';
 const peggyGrammarExtension = 'pegjs';
 const grammarFilePath = 'src/peggy/';
@@ -21,7 +21,7 @@ const grammarFilePath = 'src/peggy/';
 /********************/
 
 async function peggyCopyDTS() {
-  return gulp.src(`${grammarFilePath}*.d.ts`).pipe(gulp.dest(`${buildDirectory}/parser`));
+  return gulp.src(`${grammarFilePath}*.d.ts`).pipe(gulp.dest(`${buildDirectory}`));
 }
 
 async function peggyGen() {
@@ -56,21 +56,17 @@ function buildWatch() {
 /********************/
 
 /**
- * Remove built files from `dist` folder while ignoring source files
+ * Remove built files from `lib` folder while ignoring source files
  */
 async function clean() {
-  const distFiles = ['module'];
+  const distFiles = [distDirectory];
 
   console.log(' ', 'Dist files to clean:');
   console.log('   ', distFiles.join('\n    '));
 
   for (const filePath of distFiles) {
-    await fs.remove(`${distDirectory}/${filePath}`);
+    await fs.remove(`${filePath}`);
   }
-  const buildFiles = [buildDirectory];
-  console.log(' ', 'Build files to clean:');
-  console.log('   ', buildFiles.join('\n    '));
-  await fs.remove(`${buildDirectory}`);
 }
 
 const execPeggy = gulp.parallel(peggyCopyDTS, peggyGen);

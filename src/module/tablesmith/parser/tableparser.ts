@@ -1,4 +1,4 @@
-import { parse, SyntaxError } from '../../../../build/parser/peggytable';
+import { parse, SyntaxError } from './peggytable';
 import type TSParserFactory from './tsparserfactory';
 
 class Tableparser {

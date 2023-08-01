@@ -1,22 +1,18 @@
 # Tablesmith like Tables<!-- omit in TOC -->
 
-![CI](https://github.com/klaas1979/tablesmith-like-api/actions/workflows/node.js.yml/badge.svg) [![GitHub release](https://img.shields.io/github/release/klaas1979/tablesmith-like-api?include_prereleases=&sort=semver&color=blue)](https://github.com/klaas1979/tablesmith-like-api/releases/) [![issues - tablesmith-like](https://img.shields.io/github/issues/klaas1979/tablesmith-like-api)](https://github.com/klaas1979/tablesmith-like/issues) [![License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/klaas1979/tablesmith-like-api/blob/main/LICENSE.txt)
+![CI](https://github.com/klaas1979/tablesmith-like-api/actions/workflows/node.js.yml/badge.svg) [![GitHub release](https://img.shields.io/github/release/klaas1979/tablesmith-like-api?include_prereleases=&sort=semver&color=blue)](https://github.com/klaas1979/tablesmith-like-api/releases/) [![issues - tablesmith-like-api](https://img.shields.io/github/issues/klaas1979/tablesmith-like-api)](https://github.com/klaas1979/tablesmith-like/issues) [![License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/klaas1979/tablesmith-like-api/blob/main/LICENSE.txt)
 
-Use Tablesmith-like tables in FoundryVTT and create complex nested tables. For more about Tablesmith see the [Tablesmiths Homepage](http://www.mythosa.net/p/tablesmith.html) and the [Forum for TableSmith](https://groups.io/g/tablesmith).
+Use Tablesmith-like API as basic for creating complex nested tables. For more about Tablesmith see the [Tablesmiths Homepage](http://www.mythosa.net/p/tablesmith.html) and the [Forum for TableSmith](https://groups.io/g/tablesmith).
 
-Tablesmith table syntax allows it to create anything from simple tables and nested tables as in Foundry, to complex linked tables with loops, conditionals, parameters and more. Results can be send to chat or a Journal.
+Tablesmith table syntax allows it to create anything from simple tables and nested tables, to complex linked tables with loops, conditionals, parameters and more.
 
-Tablesmith is useful for Character and NPC generation, Solo play, generating Encounters, Inns, Weather and whatever else is needed in your adventure. Within the forum is a files area with a lot tables ranging from simple name tables up to complex content generation of all kind. Tablesmith supports Dataset to store data between calls or rolls and to share data between tables. A special feature is access to the Gamedata like Actors, Items and Journals via Datasets. Calls to tables can be stored in Links and called from Chat, JournalEntries or RollTable results.
+Tablesmith is useful for Character and NPC generation, Solo play, generating Encounters, Inns, Weather and whatever else is needed in your adventure. Within the forum is a files area with a lot tables ranging from simple name tables up to complex content generation of all kind. Tablesmith supports Dataset to store data between calls or rolls and to share data between tables.
 
 ## Table of Contents<!-- omit in TOC -->
 
 - [Tablesmith like Tables](#tablesmith-like-tables)
   - [Table of Contents](#table-of-contents)
-  - [Foundry versions](#foundry-versions)
-  - [Foundry integration](#foundry-integration)
     - [Call Syntax](#call-syntax)
-    - [Foundry Table integration](#foundry-table-integration)
-      - [Foundry RollTables in Tablesmith](#foundry-rolltables-in-tablesmith)
     - [Tablesmith Form](#tablesmith-form)
     - [Macro](#macro)
     - [Chat Commands](#chat-commands)
@@ -27,7 +23,6 @@ Tablesmith is useful for Character and NPC generation, Solo play, generating Enc
     - [Tables in different Journals or Folders](#tables-in-different-journals-or-folders)
     - [Formatting Tips for Journal Tables](#formatting-tips-for-journal-tables)
   - [Datasets General](#datasets-general)
-    - [Foundry Game Data Datasets](#foundry-game-data-datasets)
   - [Implemented Tablesmith Features](#implemented-tablesmith-features)
     - [Groups](#groups)
       - [Splitting Group Entries / Ranges](#splitting-group-entries--ranges)
@@ -49,19 +44,6 @@ Tablesmith is useful for Character and NPC generation, Solo play, generating Enc
   - [Special Appreciations](#special-appreciations)
   - [Licensing](#licensing)
 
-## Foundry versions
-
-The plugin is only compatible with V10 use older Releases for V9.
-
-## Foundry integration
-
-Basically Tablesmith Tables can be used in the following ways:
-
-1. A **Group Call expression within a Table Result** of type text, that is dynamically evaluated.
-2. With the **Tablesmith form** to select Tables and roll on them.
-3. Using Chat commands `/ts` or `/tablesmith`.
-4. **API** that is exposed on the module.
-
 ### Call Syntax
 
 For all calls the tablename is not case sensitive for convenience. The following is all equal to find a table: `Simple`, `simple`, `SIMPLE`, `sImPle`, and so on. The call `[Simple(1,2)]:2` draws from the table `Simple`, two times (`:2`), setting the first parameter to `1` and the second to `2`. The syntax is:
@@ -80,14 +62,6 @@ For all calls the tablename is not case sensitive for convenience. The following
 [Tablename.Groupname(params)]:times
 ```
 
-### Foundry Table integration
-
-Any standard Table can call a Tablesmith table by using the Tablesmith Call syntax without any other text as *Result Details*. Only the chat message is altered and the call value is replaced with a rolled Tablesmith result. The `RollTable.draw` return value is left as is and contains the original data.
-
-#### Foundry RollTables in Tablesmith
-
-To integrate existing Foundry Tables some simple macros are included to read existing tables and transfer them into basic Tablesmith file format to integrate them in tablesmith tables, or more likely combine them with to provide more full fledged results.
-
 ### Tablesmith Form
 
 One macro contained within the added compendium opens the Tablesmith Form, where all loaded tables can be called.
@@ -105,13 +79,13 @@ The chat commands `ts` and `tablesmith` can be used to call a table directly by 
 Links to Table calls including parameter values can be created with this link syntax:
 `@Tablesmith[CallSyntax]{Link Name}` or `@TS[CallSyntax]{Link Name}`. The `{Link Name}` can be omitted, then the tablename is used instead.
 
-Where `CallSyntax` must be in format defined above. This links can be embedded anywhere where FoundryVTT `@Marco` / `@Compendium` / ... links work.
+Where `CallSyntax` must be in format defined above.
 
 This links are useful to embed in JournalEntries RollTables or Chat Messages to have a shortcut to a Tablesmith call.
 
 ### API
 
-For the full documentation of API methods see the source documentation in [tablesmithapi.ts](src/module/foundry/tablesmithapi.ts) that is well documented.
+TODO define API outside of Foundry
 
 The main method to use in the API is `evaluateTable(expression: string, options?: {...})` where the expression is a valid Table call, that may donate the Group to call, define Parameters and the roll count. I.e. `evaluateTable('[Char.name(1,name)]:5')`. The method takes an option argument, to configure the behaviour, i.e. adding result to chat, to a journal, configuring the journal and more. For the full documentation of options see the source documentation linked above.
 
@@ -134,6 +108,8 @@ For long tables it is recommended to use `SHIFT+Enter` instead of `Enter` to sav
 
 ## Datasets General
 
+TODO a DSStoreFactory implementation must be provided for Dataset to work, document.
+
 There are a number of functions (see below all starting with `DS`) designed to be used with datasets. Datasets are basically tables, consisting of entries that each share the same data fields or attributes or to use table calculation term columns.
 
 Each entry can be thougth of as a row of the table. The table is sorted, with an index donating it's place within the table. The index for the first row or entry starts with `1` (not  with `0`).
@@ -154,41 +130,6 @@ The table below is a visual representation of an example monster table.
 Once a dataset is created, and has items added to it, including setting the values for the fields, it can be used, by retrieving those values using `DSGet`. The Dataset is sortable with `DSSort`. Entries can be searched for with `DSFind`. Singl entries can be removed using `DSRemove`.
 
 Datasets can be persisted using `DSWrite` and later reloaded using `DSRead`.
-
-### Foundry Game Data Datasets
-
-To access foundry Gamedata, datasets can be used. The following Game data collections can be accessed by a Dataset:
-
-- game.actors
-- game.cards
-- game.combats
-- game.items
-- game.journal
-- game.users
-- game.scenes
-- game.tables
-
-The Dataset is created by the standard `DSRead` TS function:
-
-```TAB
-%store%,
-:Start
-1,{DSRead~store,game.actors}
-```
-
-To access data the dotted notation can be used to traverse the object. As the Gamedata is system and potentially FoundryVTT version specific the complete path must be used to access data. An example using the FATE System is:
-
-```TAB
-{DSRead~store,game.actors} # Actor dataset
-{DSCount~store} # Count of Charaters
-{DSGet~store,1,name} # getting name
-{DSGet~store,1,_id} #getting id
-{DSGet~store,1,data.skills.Athletics.rank} # traversing to a value
-{DSCalc~store,Sum,data.skills.Athletics.rank} # Using calc with a value
-{DSFind~store,1,data.skills.Athletics.rank=2,name=New Character} # Finding an entity
-```
-
-The Gamedata collections can only be read. All functions that change the dataset like `DSSet`, `DSRemove` or `DSWrite` are not supported.
 
 ## Implemented Tablesmith Features
 
@@ -355,14 +296,10 @@ See the [FUNCTIONS](./FUNCTIONS.md) file for a documentation of all functions.
 ## Special Appreciations
 
 - **Bruce Gulke** to create Tablesmith in the first place and give me a thumbs up to create this plugin. Check [Tablesmith](http://www.mythosa.net/p/tablesmith.html) out and buy him a coffee be licensing the shareware version.  
-- **FoundryVTT Discord** for supporting with all my questions about Foundry development. Especially @ghost and @LukeAbby for helping me with all starting questions.
-- **League of Extraordinary FoundryVTT Developers** and all the other people for cool support documentation and tools to make this development possible in the first place.
-- Thanks to @ghost-fvtt for the ![foundry-factory](https://github.com/ghost-fvtt/foundry-factory) as bootstrapping start.
 
 ## Licensing
 
-[![License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/klaas1979/tablesmith-like/blob/main/LICENSE.txt)
+[![License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/klaas1979/tablesmith-like-api/blob/main/LICENSE.txt)
 
 The **documentation** contains parts that are **not** licensed under MIT. These parts are copied and adapted from the [documentation of Bruce Gulke](http://www.mythosa.net/p/tablesmith.html) who gave the right to include the documentation within this project, granting no other rights as long as he and his work is referenced.
 
-This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agreement for module development](https://foundryvtt.com/article/license/).

@@ -24,7 +24,7 @@ npm-debug.log
 build
 
 # Distribution files
-dist
+lib
 
 # ESLint
 .eslintcache

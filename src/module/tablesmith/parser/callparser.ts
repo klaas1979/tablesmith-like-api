@@ -1,4 +1,4 @@
-import { parse } from '../../../../build/parser/peggycall';
+import { parse } from './peggycall';
 import { TableCallValues } from '../tablecallvalues';
 
 class Callparser {

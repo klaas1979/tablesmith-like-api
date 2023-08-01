@@ -1,4 +1,4 @@
-import { parse, SyntaxError } from '../../../../build/parser/peggyhtml2text';
+import { parse, SyntaxError } from './peggyhtml2text';
 
 class Html2Text {
   convert(call: string): string {

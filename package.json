@@ -12,13 +12,17 @@
     "url": "https://github.com/klaas1979/tablesmith-like-api/issues"
   },
   "author": "Klaas",
+  "main": "./lib/cjs/src/index.js",
+  "module": "./lib/esm/src/index.js",
+  "files": [
+    "lib/"
+  ],
   "scripts": {
-    "build": "gulp build",
-    "build:watch": "gulp watch",
-    "build:watch-peggy": "gulp watchpeggy",
+    "build": "gulp build && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "build:watch": "gulp watchpeggy",
     "peggy": "gulp peggy",
     "clean": "gulp clean",
-    "clean:link": "gulp link --clean",
+    "prepublishOnly": "npm run build",
     "release": "standard-version",
     "lint": "eslint --ext .ts,.js .",
     "lint:fix": "eslint --ext .ts,.js --fix .",

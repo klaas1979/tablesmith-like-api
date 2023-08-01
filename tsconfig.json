@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2016",
+    "module": "ES2020",
     "lib": ["DOM", "es2016"],
     "types": [],
     "esModuleInterop": true,
@@ -11,7 +12,9 @@
     "allowJs": true,
     "checkJs": false,
     "strict": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "declaration": true,
+    "outDir": "./lib/esm"
   },
   "include": ["src"]
 }
